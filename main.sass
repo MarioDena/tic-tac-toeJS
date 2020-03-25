@@ -1,0 +1,246 @@
+@font-face
+  font-family: 'Anglean'
+  src: url('assets/web fonts/Anglean.ttf') format('truetype')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'Pixel12'
+  src: url('assets/web fonts/Pixel12x10Mono.ttf') format('truetype')
+  font-weight: normal
+  font-style: normal
+
+@font-face
+  font-family: 'neon2'
+  src: url('assets/web fonts/neon2.ttf') format('truetype')
+  font-weight: normal
+  font-style: normal
+
+@mixin animation
+  animation-name: play-button
+  animation-duration: 4s
+  animation-timing-function: linear
+  animation-delay: 0s
+  animation-iteration-count: infinite
+  animation-direction: normal
+
+@mixin no-animation
+  animation: none
+
+* 
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+
+
+body,
+html 
+  width: 100%
+  height: 100vh
+  font-size: 16px
+  background-color: black
+
+
+#header-section
+  width: 100%
+  height: 100vh
+  color: rgb(126, 249, 255)
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-around
+  position: absolute
+  z-index: 5
+  background-color: black
+
+.enter-button,
+.continue-button 
+  border-radius: 15px
+  background-color: transparent
+  padding: 7px 17px
+  border: none
+  color: #3079ed
+  @include animation
+
+
+@keyframes play-button
+  0%
+    -webkit-transform: scale(1)
+    -ms-transform: scale(1)
+    transform: scale(1)
+
+  50%
+    -webkit-transform: scale(1.1)
+    -ms-transform: scale(1.1)
+    transform: scale(1.1)
+
+  100%
+    -webkit-transform: scale(1)
+    -ms-transform: scale(1)
+    transform: scale(1)
+
+
+
+.enter-button:hover,
+.continue-button:hover
+  @include no-animation
+  transform: scale(1.1)
+
+.enter-button:active,
+.continue-button:active
+  @include no-animation
+  transform: scale(1)
+
+
+.enter-span,
+.continue-span
+  font-family: 'Pixel12', cursive
+  font-size: 1.4rem
+  letter-spacing: 0.2rem
+  color: white
+  font-weight: 900
+  text-shadow: 0 0 10px #FFFFFF
+
+.main-container
+  width: 100%
+  height: 100vh
+  position: absolute
+
+.names-section
+  width: 100%
+  height: 100vh
+  position: absolute
+  z-index: 4
+  background-color: black
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-around
+  .names
+    font-size: 1.1rem
+    width: 70%
+
+.options-section 
+  width: 100%
+  height: 100vh
+  z-index: 3
+  position: absolute
+  background-color: black
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: space-around
+
+
+.options-header 
+  margin: 0
+
+
+.options 
+  width: 100%
+  height: 50%
+
+
+.half-inner-options 
+  width: 30%
+  height: 100%
+  color: white
+
+.h-option
+  width: 90%
+  height: 100%
+  font-family: 'neon2', Arial, sans-serif
+  font-size: 12rem
+  padding: 5%
+
+.h-option:hover
+  transform: scale(1.1)
+  cursor: pointer
+
+
+.choose-header,
+.name-header,
+.label-f-p-n,
+.label-s-p-n
+  font-family: 'Pixel12', Arial, sans-serif
+  color: #2a2a2a
+  margin-top: 1%
+
+.input-f-p-n,
+.input-s-p-n
+  font-family: 'Anglean', Arial, sans-serif
+  background-color: black
+  color: #343434
+  width: 30%
+  font-size: 1.1rem
+  border: 2px solid #343434
+  text-align: center
+  text-transform: uppercase
+
+.input-f-p-n:focus,
+.input-s-p-n:focus
+  color: #ff0090
+  border-color: #ff0
+
+.name-header
+  text-transform: capitalize
+
+.x-option
+  color: #ff0
+
+.o-option
+  color: #00f
+
+.x-option:hover
+  color: #00f
+  text-shadow: 2px 3px 0 #ff0
+
+.o-option:hover
+  color: #00f
+  text-shadow: 2px 3px 0 #ff0090
+
+.board-section 
+  width: 100%
+  height: 100vh
+  display: grid
+  grid-template-columns: repeat(3, auto)
+  align-content: center
+  align-items: center
+  justify-content: center
+  background-color: black
+  position: absolute
+  z-index: 2
+
+.inner-cell
+  width: 125px
+  height: 125px
+  font-family: 'neon2', Arial, sans-serif
+  color: rgb(0,255,0)
+  font-size: 6.5rem
+  display: flex
+  align-items: center
+  justify-content: center
+  border: 3px solid
+  border-image-source: linear-gradient(180deg, #101010, #343434, #222222)
+  border-image-slice: 1
+
+.inner-cell:first-child,
+.inner-cell:nth-child(2),
+.inner-cell:nth-child(3)
+  border-top: none
+
+.inner-cell:nth-child(3n +1)
+  border-left: none
+
+.inner-cell:nth-child(3n +3)
+  border-right: none
+
+.inner-cell:nth-child(7),
+.inner-cell:nth-child(8),
+.inner-cell:last-child
+  border-bottom: none
+
+.inner-cell:hover
+  background-color: #101010
+  cursor: pointer
+  color: rgb(255, 0, 144)
