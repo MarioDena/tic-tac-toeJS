@@ -1,64 +1,46 @@
 function getId(id) {
-    return document.getElementById(id)
+  return document.getElementById(id);
 }
 
-function displaySections() {
-    const h_s = getId('header-section');
-
-    if ((h_s.style.display ===  'block' || 'flex')) {
-        h_s.style.display = 'none';
-        }
-    else {
-        h_s.style.display = 'block';
-    }
+// eslint-disable-next-line no-unused-vars
+function displaySections(section) {
+  const sectionID = getId(section);
+  sectionID.style.display = 'none';
 }
 
-function displaySecondSection() {
-    const o_s = getId('names-section');
-
-    if ((o_s.style.display ===  'block' || 'flex')) {
-        o_s.style.display = 'none';
-    }
-    else {
-        o_s.style.display = 'block';
-    }
+class PlayerFactory {
+  constructor(name, symbol) {
+    this.name = name;
+    this.symbol = symbol;
+  }
 }
 
-function displayThirdSection() {
-    const o_s = getId('options-section');
+const gamefactory = () => {
+  const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  const innerCells = document.querySelectorAll('.inner-cell');
+  let player;
 
-    if ((o_s.style.display ===  'block' || 'flex')) {
-        o_s.style.display = 'none';
-    }
-    else {
-        o_s.style.display = 'block';
-    }
-}
+  const play = (cell) => {
+    gameBoard[cell] = player.symbol;
+    innerCells[cell].innerHTML = player.symbol;
+  };
 
-function getValue() {
-    let choseOption = '';
-    choseOption = getId('chose-option-x').innerText;
-    console.log(choseOption);
-}
+  const startBoard = () => {
+    innerCells.forEach(cell => { cell.innerHTML = ''; cell.addEventListener('click', play.bind(this, cell.id), false); });
+  };
 
-function getSecondValue() {
-    let choseOption = '';
-    choseOption = getId('chose-option-o').innerText;
-    console.log(choseOption);
-}
+  const start = () => {
+    player = new PlayerFactory(getId('first-player').value, 'O');
+    startBoard();
+  };
 
-function getName() {
-    let $jsName = document.querySelector('.input-f-p-n');
-    let $jsValue = document.querySelector('.jsValue');
+  const restart = () => {
+    startBoard();
+  };
 
-    $jsName.addEventListener('input', function(event){
-        $jsValue.innerHTML = $jsName.value;
-    }, false);
-}
+  return {
+    start, restart, play, gameBoard,
+  };
+};
 
-let gameBoard =(() => {
-    let gameboard = ['', '', '', '', '', '', '', '', ''];
-});
-
-
-
+const game = gamefactory();
