@@ -1,5 +1,4 @@
-@font-face
-  font-family: 'Anglean'
+@font-face font-family: 'Anglean'
   src: url('assets/web fonts/Anglean.ttf') format('truetype')
   font-weight: normal
   font-style: normal
@@ -244,3 +243,7 @@ html
   background-color: #101010
   cursor: pointer
   color: rgb(255, 0, 144)
+
+.restart-button
+  position: absolute;
+ 
