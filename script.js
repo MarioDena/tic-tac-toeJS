@@ -50,6 +50,7 @@ const gamefactory = () => {
     if (playableCells.length === 0) {
       return true;
     }
+    return false;
   }
 
   function aiSelection(Symbol) {
@@ -87,6 +88,7 @@ const gamefactory = () => {
     let bestMove;
     if (Symbol === 'X') {
       let bestScore = -10000;
+      // eslint-disable-next-line no-plusplus
       for (let i = 0; i < moves.length; i++) {
         if (moves[i].score > bestScore) {
           bestScore = moves[i].score;
@@ -108,7 +110,7 @@ const gamefactory = () => {
   }
 
   const cpuPlay = () => {
-    const cpuPlay = aiSelection('X').index
+    const cpuPlay = aiSelection('X').index;
     gameBoard[cpuPlay] = 'X';
     innerCells[cpuPlay].innerHTML = 'X';
     const gameOver = checkWinningConditions('X').gameWon;
