@@ -45,13 +45,93 @@ const gamefactory = () => {
     };
   };
 
+  function checkForTie() {
+    const playableCells = gameBoard.filter(cell => typeof cell === 'number');
+    if (playableCells.length === 0) {
+      return true;
+    }
+  }
+
+  function aiSelection(Symbol) {
+    const currentBoard = gameBoard;
+    const playableCells = gameBoard.filter(cell => typeof cell === 'number');
+    if (playableCells.length === 0) {
+      return { score: 0 };
+    }
+    if (checkWinningConditions('O').gameWon) {
+      return { score: -10 };
+    // eslint-disable-next-line no-else-return
+    } else if (checkWinningConditions('X').gameWon) {
+      return { score: 10 };
+    }
+
+    const moves = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < playableCells.length; i++) {
+      const move = {};
+      move.index = gameBoard[playableCells[i]];
+      currentBoard[playableCells[i]] = Symbol;
+
+      if (Symbol === 'X') {
+        const result = aiSelection('O');
+        move.score = result.score;
+      } else {
+        const result = aiSelection('X');
+        move.score = result.score;
+      }
+
+      currentBoard[playableCells[i]] = move.index;
+      moves.push(move);
+    }
+
+    let bestMove;
+    if (Symbol === 'X') {
+      let bestScore = -10000;
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score > bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    } else {
+      let bestScore = 10000;
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < moves.length; i++) {
+        if (moves[i].score < bestScore) {
+          bestScore = moves[i].score;
+          bestMove = i;
+        }
+      }
+    }
+
+    return moves[bestMove];
+  }
+
+  const cpuPlay = () => {
+    const cpuPlay = aiSelection('X').index
+    gameBoard[cpuPlay] = 'X';
+    innerCells[cpuPlay].innerHTML = 'X';
+    const gameOver = checkWinningConditions('X').gameWon;
+    if (gameOver) {
+      getId('restart').style.display = 'block';
+    }
+    if (checkForTie() === true) {
+      getId('restart').style.display = 'block';
+    }
+  };
+
   const play = (cell) => {
-    const gameOver = checkWinningConditions(player.symbol).gameWon;
-    // eslint-disable-next-line no-unused-expressions
-    gameOver ? getId('restart').style.display = 'block' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
+    if (typeof gameBoard[cell] === 'number') {
+      const gameOver = checkWinningConditions(player.symbol).gameWon;
+      // eslint-disable-next-line no-unused-expressions
+      gameOver ? getId('restart').style.display = 'block' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
+      // eslint-disable-next-line no-unused-expressions
+      checkForTie() === true ? getId('restart').style.display = 'block' : cpuPlay();
+    }
   };
 
   const startBoard = () => {
+    getId('restart').style.display = 'none';
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < innerCells.length; i++) {
       gameBoard[i] = i;
