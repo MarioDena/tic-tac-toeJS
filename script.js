@@ -47,9 +47,7 @@ const gamefactory = () => {
 
   function checkForTie() {
     const playableCells = gameBoard.filter(cell => typeof cell === 'number');
-    if (playableCells.length === 0) {
-      return true;
-    }
+    if (playableCells.length === 0) return true;
     return false;
   }
 
