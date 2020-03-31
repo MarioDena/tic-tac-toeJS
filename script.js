@@ -19,6 +19,7 @@ const gamefactory = () => {
   const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const innerCells = document.querySelectorAll('.inner-cell');
   let player;
+  let turn = false;
 
   const checkWinningConditions = (playerChecked) => {
     const gameWinningConditions = [
@@ -39,7 +40,6 @@ const gamefactory = () => {
         gameWon = playerChecked;
       }
     });
-
     return {
       gameWon,
     };
@@ -56,14 +56,13 @@ const gamefactory = () => {
   function aiSelection(Symbol) {
     const currentBoard = gameBoard;
     const playableCells = gameBoard.filter(cell => typeof cell === 'number');
-    if (playableCells.length === 0) {
-      return { score: 0 };
-    }
     if (checkWinningConditions('O').gameWon) {
       return { score: -10 };
     // eslint-disable-next-line no-else-return
     } else if (checkWinningConditions('X').gameWon) {
       return { score: 10 };
+    } else if (playableCells.length === 0) {
+      return { score: 0 };
     }
 
     const moves = [];
@@ -80,7 +79,6 @@ const gamefactory = () => {
         const result = aiSelection('X');
         move.score = result.score;
       }
-
       currentBoard[playableCells[i]] = move.index;
       moves.push(move);
     }
@@ -109,31 +107,56 @@ const gamefactory = () => {
     return moves[bestMove];
   }
 
+  const capitalize = (string) => {
+    if (typeof string !== 'string') return '';
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const alerts = () => {
+    if (checkWinningConditions('O').gameWon){
+      getId('check').innerText = `${capitalize(player.name)} you win!!`;
+    }
+    else if (checkWinningConditions('X').gameWon){
+      getId('check').innerText = 'Computer wins!! :c';
+    }
+    else if (checkForTie() === true) {
+      getId('check').innerText = 'It\'s a tie!!';
+    }
+  };
+
   const cpuPlay = () => {
     const cpuPlay = aiSelection('X').index;
     gameBoard[cpuPlay] = 'X';
     innerCells[cpuPlay].innerHTML = 'X';
     const gameOver = checkWinningConditions('X').gameWon;
     if (gameOver) {
-      getId('restart').style.display = 'block';
+      getId('restart').style.display = 'flex';
+      alerts();
     }
     if (checkForTie() === true) {
-      getId('restart').style.display = 'block';
+      getId('restart').style.display = 'flex';
+      alerts();
     }
   };
 
   const play = (cell) => {
+    if (turn === false) {
+      turn = true;
+      getId('player-name').style.display = 'none';
+    }
     if (typeof gameBoard[cell] === 'number') {
       const gameOver = checkWinningConditions(player.symbol).gameWon;
       // eslint-disable-next-line no-unused-expressions
-      gameOver ? getId('restart').style.display = 'block' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
+      gameOver ? getId('restart').style.display = 'flex' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
       // eslint-disable-next-line no-unused-expressions
-      checkForTie() === true ? getId('restart').style.display = 'block' : cpuPlay();
+      checkForTie() === true ? getId('restart').style.display = 'flex' : cpuPlay();
+      alerts();
     }
   };
 
   const startBoard = () => {
     getId('restart').style.display = 'none';
+    getId('player-name').innerHTML = `${capitalize(player.name)} you go first`;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < innerCells.length; i++) {
       gameBoard[i] = i;
