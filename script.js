@@ -178,3 +178,5 @@ const gamefactory = () => {
 
 // eslint-disable-next-line no-unused-vars
 const game = gamefactory();
+
+export default PlayerFactory;

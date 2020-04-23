@@ -1,0 +1,29 @@
+{
+  "name": "tic-tac-toejs",
+  "version": "1.0.0",
+  "description": "Tic-Tac-Toe game were the player play against an AI",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest --config jest.config.js",
+    "watch": "jest --watch *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarioDena/tic-tac-toeJS.git"
+  },
+  "keywords": [
+    "Luzaks"
+  ],
+  "author": "Guadalupe Rangel <kanemekanik@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarioDena/tic-tac-toeJS/issues"
+  },
+  "homepage": "https://github.com/MarioDena/tic-tac-toeJS#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "babel-jest": "^25.4.0",
+    "babel-polyfill": "^6.26.0",
+    "jest": "^25.4.0"
+  }
+}
