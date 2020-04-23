@@ -1,6 +1,6 @@
-import PlayerFactory  from './script';
+import PlayerFactoryMock  from './PlayerFactoryMock';
 
-let newPlayer = new PlayerFactory('John', 'O');
+let newPlayer = new PlayerFactoryMock('John', 'O');
 const newPlayerName = newPlayer.name;
 const newPlayerSymbol = newPlayer.symbol;
 
