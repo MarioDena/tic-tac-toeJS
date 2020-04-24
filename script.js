@@ -111,10 +111,10 @@ const gamefactory = () => {
   };
 
   const alerts = () => {
-    if (checkWinningConditions('O').gameWon){
+    if (checkWinningConditions('O').gameWon) {
       getId('check').innerText = `${capitalize(player.name)} you win!!`;
     }
-    else if (checkWinningConditions('X').gameWon){
+    else if (checkWinningConditions('X').gameWon) {
       getId('check').innerText = 'Computer wins!! :c';
     }
     else if (checkForTie() === true) {

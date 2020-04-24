@@ -8,8 +8,6 @@ const inputValue = document.createAttribute('value');
 inputValue.value = 'John';
 PlayerName.setAttributeNode(inputValue);
 
-const startMock = () => {
-  return new PlayerFactoryMock(PlayerName.value, 'O');
-};
+const startMock = () => new PlayerFactoryMock(PlayerName.value, 'O');
 
 export default startMock();
