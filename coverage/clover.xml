@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1588178545813" clover="3.2.0">
-  <project timestamp="1588178545814" name="All files">
+<coverage generated="1588178721411" clover="3.2.0">
+  <project timestamp="1588178721411" name="All files">
     <metrics statements="99" coveredstatements="29" conditionals="41" coveredconditionals="1" methods="20" coveredmethods="7" elements="160" coveredelements="37" complexity="0" loc="99" ncloc="99" packages="1" files="2" classes="2"/>
     <file name="factoryPlayer.js" path="/home/mariodena/tic-tac-toeJS/src/factoryPlayer.js">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
