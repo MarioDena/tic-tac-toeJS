@@ -10,15 +10,16 @@
     crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="main.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="../main.css" />
+    <script src="main.js" defer></script>
+
 </head>
 <body>
 
 <header class="" id="header-section" >
-    <h1><img src="assets/tic-tac-toe.png"/></h1>
+    <h1><img src="../assets/tic-tac-toe.png"/></h1>
     <div class="d-flex flex-row align-items-center justify-content-center">
-        <button class="enter-button" onclick="displaySections(`header-section`)">
+        <button class="enter-button" onclick="displaySections('header-section')">
             <span class="enter-span">
                 &#9658;PLAY
             </span>
@@ -33,7 +34,7 @@
             <label class="label-f-p-n" for="first-player">New Challenger is:</label>
             <input class="input-f-p-n" type="text" id="first-player" name="first-player" value="Player">
         </div>
-        <button class="continue-button" type="button" onclick="displaySections(`names-section`); game.start()">
+        <button class="continue-button" type="button" onclick="displaySections('names-section'); game.start()">
                 <span class="continue-span">
                     CONTINUE&#3869;&#3866;&#3869;
                 </span>
@@ -63,6 +64,5 @@
     </div>
 
 </main>
-
 </body>
 </html>

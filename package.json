@@ -5,7 +5,8 @@
   "main": "script.js",
   "scripts": {
     "test": "jest --config jest.config.js",
-    "watch": "jest --watch *.js"
+    "watch": "jest --watch *.js",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,14 @@
   "homepage": "https://github.com/MarioDena/tic-tac-toeJS#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.9.5",
+    "@jest/environment": "^25.4.0",
+    "@testing-library/jest-dom": "^5.5.0",
     "babel-jest": "^25.4.0",
     "babel-polyfill": "^6.26.0",
-    "jest": "^25.4.0"
-  }
+    "jest": "^25.4.0",
+    "lodash": "^4.17.15",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {}
 }
