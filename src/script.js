@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable func-names */
 import PlayerFactory from './factoryPlayer';
 
 function getId(id) {
