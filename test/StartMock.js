@@ -1,3 +1,6 @@
+/* eslint-disable import/no-unresolved */
+
+// eslint-disable-next-line import/extensions
 import PlayerFactoryMock from './PlayerFactoryMock';
 
 const PlayerName = document.createElement('input');
