@@ -65,8 +65,8 @@ describe('Test restart/startBoard functions.', () => {
   });
 });
 
-describe('Test play function in gameFactory.', () => {
-  it('I don\'t know what I am doing but I am here', () => {
+describe('Test checkForWinningConditions and checkForTie functions inside play function in gameFactory.', () => {
+  it('Testing for complete game play.', () => {
     const window = new AsyncWindow();
     window.document.body.innerHTML = `
             <h3 id="player-name" class="player-name">jkdns</h3>
