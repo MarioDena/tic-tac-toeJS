@@ -129,40 +129,63 @@ const gamefactory = () => {
       getId('restart').style.display = 'flex';
       alerts();
     }
+    return {
+      aiSelection,
+    };
   };
 
   const play = (cell) => {
+    const gameOver = checkWinningConditions(player.symbol).gameWon;
+    const innerCells = document.querySelectorAll('.inner-cell');
     if (turn === false) {
       turn = true;
       getId('player-name').style.display = 'none';
     }
     if (typeof gameBoard[cell] === 'number') {
-      const gameOver = checkWinningConditions(player.symbol).gameWon;
       // eslint-disable-next-line no-unused-expressions
-      gameOver ? getId('restart').style.display = 'flex' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
+      if (gameOver === true) {
+        getId('restart').style.display = 'flex';
+      } else {
+        gameBoard[cell] = player.symbol;
+        innerCells[cell].innerText = player.symbol;
+      }
       // eslint-disable-next-line no-unused-expressions
       checkForTie() === true ? getId('restart').style.display = 'flex' : cpuPlay();
       alerts();
     }
+    return {
+      gameBoard,
+      checkWinningConditions,
+      innerCells,
+      checkForTie,
+      cpuPlay,
+      alerts,
+    };
   };
 
-  const startBoard = () => {
-    getId('restart').style.display = 'none';
-    getId('player-name').innerHTML = `${capitalize(player.name)} you go first`;
+  const startBoard = (restartButton, playerName) => {
+    const buttonRestart = getId(`${restartButton}`);
+    buttonRestart.style.display = 'none';
+    const spanPlayerName = getId(`${playerName}`);
+    spanPlayerName.innerHTML = `${capitalize(player.name)} you go first`;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < innerCells.length; i++) {
       gameBoard[i] = i;
     }
-    innerCells.forEach(cell => { cell.innerHTML = ''; cell.addEventListener('click', play.bind(this, cell.id), false); });
+    const cells = [];
+    innerCells.forEach(cell => { cell.innerHTML = ''; cell.addEventListener('click', play.bind(this, cell.id), false); cells.push(cell); });
+
+    return {
+      buttonRestart,
+      spanPlayerName,
+      cells,
+    };
   };
 
-  const restart = () => {
-    startBoard();
-  };
+  const restart = (restartButton, playerName) => startBoard(restartButton, playerName);
 
   const start = (name = getId('first-player').value) => {
     player = new PlayerFactory(name, 'O');
-    restart();
     return player;
   };
 

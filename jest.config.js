@@ -1,3 +1,4 @@
+
 module.exports = {
   // Flag to indicate if Code Coverage to be collected and reported
   collectCoverage: true,

@@ -34,7 +34,7 @@
             <label class="label-f-p-n" for="first-player">New Challenger is:</label>
             <input class="input-f-p-n" type="text" id="first-player" name="first-player" value="Player">
         </div>
-        <button class="continue-button" type="button" onclick="displaySections('names-section'); game.start()">
+        <button id="continue-button" class="continue-button" type="button" onclick="displaySections('names-section'); game.start(); game.restart('restart', 'player-name')">
                 <span class="continue-span">
                     CONTINUE&#3869;&#3866;&#3869;
                 </span>
@@ -42,7 +42,7 @@
     </section>
     <section class="game" id="game">
         <h3 id="player-name" class="player-name">jkdns</h3>
-        <section class="board-section">
+        <div class="board-section" id="board-section">
                 <div class="inner-cell" id="0" onclick="game.play()">9</div>
                 <div class="inner-cell" id="1" onclick="game.play()">9</div>
                 <div class="inner-cell" id="2" onclick="game.play()">9</div>
@@ -52,11 +52,11 @@
                 <div class="inner-cell" id="6" onclick="game.play()"></div>
                 <div class="inner-cell" id="7" onclick="game.play()"></div>
                 <div class="inner-cell" id="8" onclick="game.play()"></div>
-        </section>
+        </div>
     </section>
     <div class="opaque" id="restart">
         <h3 id="check" class="game-over">jkdns</h3>
-        <button class="restart-button" type="button" onclick="game.start()">
+        <button class="restart-button" type="button" onclick="game.start(); game.restart('restart', 'player-name')">
             <span class="continue-span">
                 Play Again ⟳
             </span>

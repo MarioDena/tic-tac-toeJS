@@ -1,4 +1,4 @@
-const PlayerName = document.createElement('input');
+export const PlayerName = document.createElement('input');
 const inputType = document.createAttribute('type');
 inputType.value = 'text';
 PlayerName.setAttributeNode(inputType);
@@ -7,13 +7,6 @@ inputAttribute.value = 'first-player';
 PlayerName.setAttributeNode(inputAttribute);
 
 
-const restartButton = document.createElement('button');
-const restartBtnId = document.createAttribute('id');
-restartBtnId.value = 'restart';
-restartButton.setAttributeNode(restartBtnId);
-
-
-export {
+export default {
   PlayerName,
-  restartButton,
 };
