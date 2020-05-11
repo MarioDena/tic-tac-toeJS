@@ -1,20 +1,16 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable func-names */
+import PlayerFactory from './factoryPlayer';
+
 function getId(id) {
   return document.getElementById(id);
 }
 
 // eslint-disable-next-line no-unused-vars
-function displaySections(section) {
+window.displaySections = function (section) {
   const sectionID = getId(section);
   sectionID.style.display = 'none';
-}
-
-class PlayerFactory {
-  constructor(name, symbol) {
-    this.name = name;
-    this.symbol = symbol;
-  }
-}
-
+};
 const gamefactory = () => {
   const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const innerCells = document.querySelectorAll('.inner-cell');
@@ -56,7 +52,7 @@ const gamefactory = () => {
     const playableCells = gameBoard.filter(cell => typeof cell === 'number');
     if (checkWinningConditions('O').gameWon) {
       return { score: -10 };
-    // eslint-disable-next-line no-else-return
+      // eslint-disable-next-line no-else-return
     } else if (checkWinningConditions('X').gameWon) {
       return { score: 10 };
     } else if (playableCells.length === 0) {
@@ -133,46 +129,72 @@ const gamefactory = () => {
       getId('restart').style.display = 'flex';
       alerts();
     }
+    return {
+      aiSelection,
+    };
   };
 
   const play = (cell) => {
+    const gameOver = checkWinningConditions(player.symbol).gameWon;
+    const innerCells = document.querySelectorAll('.inner-cell');
     if (turn === false) {
       turn = true;
       getId('player-name').style.display = 'none';
     }
     if (typeof gameBoard[cell] === 'number') {
-      const gameOver = checkWinningConditions(player.symbol).gameWon;
       // eslint-disable-next-line no-unused-expressions
-      gameOver ? getId('restart').style.display = 'flex' : (gameBoard[cell] = player.symbol, innerCells[cell].innerHTML = player.symbol);
+      if (gameOver === true) {
+        getId('restart').style.display = 'flex';
+      } else {
+        gameBoard[cell] = player.symbol;
+        innerCells[cell].innerText = player.symbol;
+      }
       // eslint-disable-next-line no-unused-expressions
       checkForTie() === true ? getId('restart').style.display = 'flex' : cpuPlay();
       alerts();
     }
+    return {
+      gameBoard,
+      checkWinningConditions,
+      innerCells,
+      checkForTie,
+      cpuPlay,
+      alerts,
+    };
   };
 
-  const startBoard = () => {
-    getId('restart').style.display = 'none';
-    getId('player-name').innerHTML = `${capitalize(player.name)} you go first`;
+  const startBoard = (restartButton, playerName) => {
+    const buttonRestart = getId(`${restartButton}`);
+    buttonRestart.style.display = 'none';
+    const spanPlayerName = getId(`${playerName}`);
+    spanPlayerName.innerHTML = `${capitalize(player.name)} you go first`;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < innerCells.length; i++) {
       gameBoard[i] = i;
     }
-    innerCells.forEach(cell => { cell.innerHTML = ''; cell.addEventListener('click', play.bind(this, cell.id), false); });
+    const cells = [];
+    innerCells.forEach(cell => { cell.innerHTML = ''; cell.addEventListener('click', play.bind(this, cell.id), false); cells.push(cell); });
+
+    return {
+      buttonRestart,
+      spanPlayerName,
+      cells,
+    };
   };
 
-  const start = () => {
-    player = new PlayerFactory(getId('first-player').value, 'O');
-    startBoard();
+  const restart = (restartButton, playerName) => startBoard(restartButton, playerName);
+
+  const start = (name = getId('first-player').value) => {
+    player = new PlayerFactory(name, 'O');
+    return player;
   };
 
-  const restart = () => {
-    startBoard();
-  };
 
   return {
     start, restart, play, gameBoard,
   };
 };
-
-// eslint-disable-next-line no-unused-vars
+export default gamefactory();
 const game = gamefactory();
+// eslint-disable-next-line no-unused-vars
+window.game = gamefactory();
