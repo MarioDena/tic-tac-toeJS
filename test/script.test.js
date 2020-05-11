@@ -91,14 +91,8 @@ describe('Test checkForWinningConditions and checkForTie functions inside play f
     expect(newPlayGame.innerCells.length).toBe(9);
     expect(newPlayGame.gameBoard[2]).toBe(2);
     expect(gamefactory.play().checkWinningConditions()).toStrictEqual({ gameWon: null });
-    /*
-    expect(newPlayGame.cpuPlay()).toBe('');
-        expect(gamefactory.play(2).gameBoard).toStrictEqual([0, 1, 'O', 3, 4, 5, 6, 7, 8]);
-        expect(gamefactory.play(2).gameBoard[2]).toStrictEqual('O'); */
   });
   it('checks if the function throw errors.', async () => {
     expect(() => gamefactory.play()).not.toThrow();
-    /*
-    expect(() => gamefactory.play('2')).not.toThrow(); */
   });
 });
